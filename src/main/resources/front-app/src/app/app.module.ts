@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableComponent } from './table/table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTableModule } from '@angular/material/table';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { MatTableModule } from '@angular/material/table';
     BrowserAnimationsModule,
     FontAwesomeModule,
     FormsModule,
+    HttpClientModule,
     ReactiveFormsModule,
     MatTableModule
   ],
