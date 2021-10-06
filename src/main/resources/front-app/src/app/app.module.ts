@@ -8,6 +8,7 @@ import { ReaderComponent } from './reader/reader.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TableComponent } from './table/table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MatTableModule } from '@angular/material/table';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     BrowserAnimationsModule,
     FontAwesomeModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatTableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
