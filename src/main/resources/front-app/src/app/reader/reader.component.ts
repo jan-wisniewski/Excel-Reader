@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-reader',
@@ -9,12 +10,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class ReaderComponent implements OnInit {
 
   uploadedFile: any;
+  pencil = faPencilAlt;
 
   fileForm = this.fb.group({
     file: ['', Validators.required]
   })
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
   }
