@@ -6,11 +6,13 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ReaderComponent } from './reader/reader.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { TableComponent } from './table/table.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    ReaderComponent
+    ReaderComponent,
+    TableComponent
   ],
   imports: [
     BrowserModule,
