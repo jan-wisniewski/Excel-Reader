@@ -1,4 +1,4 @@
-import { ReaderService } from './reader.service';
+import { FileService } from './../services/file.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
@@ -17,21 +17,17 @@ export class ReaderComponent implements OnInit {
     file: ['', Validators.required]
   })
 
-  constructor(private fb: FormBuilder, private readerService: ReaderService) {}
+  constructor(private fb: FormBuilder, private fileService: FileService) {}
 
   ngOnInit(): void {
   }
 
   onFileSelected(event: any) {
-    this.uploadedFile = event;
+    this.uploadedFile = event.target.files[0];
   }
 
   onFileSend() {
-    console.log('sending');
-  }
-
-  check() {
-    this.readerService.findAll()
+    this.fileService.upload(this.uploadedFile)
     .subscribe(resp => {
       console.log(resp);
     });

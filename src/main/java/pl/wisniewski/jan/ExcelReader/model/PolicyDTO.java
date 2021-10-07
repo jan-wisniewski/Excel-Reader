@@ -6,8 +6,7 @@ import lombok.*;
 @NoArgsConstructor
 @Data
 @Builder
-public class Policy {
-    private Long id;
+public class PolicyDTO {
     private Long number;
     private String type;
     private String sum;
