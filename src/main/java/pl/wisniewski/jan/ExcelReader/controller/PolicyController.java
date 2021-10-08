@@ -5,9 +5,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import pl.wisniewski.jan.ExcelReader.mappers.PolicyMapper;
 import pl.wisniewski.jan.ExcelReader.model.Policy;
-import pl.wisniewski.jan.ExcelReader.model.PolicyDTO;
 import pl.wisniewski.jan.ExcelReader.service.PolicyService;
 
 import java.util.List;
@@ -28,7 +26,7 @@ public class PolicyController {
     public ResponseEntity<List<Policy>> upload(MultipartFile file) {
         policyService.readXlsxFile(file);
         return ResponseEntity.ok(policyService.findAll().stream()
-                .map(PolicyMapper.INSTANCE::policyDTOToPolicy)
+                .map(policyDTO -> new Policy())
                 .collect(Collectors.toList()));
     }
 

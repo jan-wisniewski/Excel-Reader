@@ -1,20 +1,27 @@
 package pl.wisniewski.jan.ExcelReader.mappers;
 
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.factory.Mappers;
+import org.springframework.stereotype.Service;
 import pl.wisniewski.jan.ExcelReader.model.Policy;
 import pl.wisniewski.jan.ExcelReader.model.PolicyDTO;
 
-@Mapper(componentModel = "spring")
-public interface PolicyMapper {
+import java.util.Objects;
 
-    PolicyMapper INSTANCE = Mappers.getMapper(PolicyMapper.class);
+@Service
+public class PolicyMapper {
 
-    @Mapping(target = "")
-    PolicyDTO policyToPolicyDTO(Policy policy);
-
-    @Mapping(target = "")
-    Policy policyDTOToPolicy(PolicyDTO policyDTO);
-
+    public Policy toEntity(PolicyDTO policyDTO) {
+        if (Objects.isNull(policyDTO)) {
+            return new Policy();
+        }
+        return Policy
+                .builder()
+                .id(policyDTO.getNumber())
+                .number(policyDTO.getNumber())
+                .name(policyDTO.getName())
+                .type(policyDTO.getType())
+                .surname(policyDTO.getSurname())
+                .sum(policyDTO.getSum())
+                .object(policyDTO.getObject())
+                .build();
+    }
 }
