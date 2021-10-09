@@ -13,15 +13,27 @@ public class PolicyMapper {
         if (Objects.isNull(policyDTO)) {
             return new Policy();
         }
-        return Policy
-                .builder()
-                .id(policyDTO.getNumber())
-                .number(policyDTO.getNumber())
-                .name(policyDTO.getName())
-                .type(policyDTO.getType())
-                .surname(policyDTO.getSurname())
-                .sum(policyDTO.getSum())
-                .object(policyDTO.getObject())
-                .build();
+        return new Policy (
+                policyDTO.getNumber(),
+                policyDTO.getName(),
+                policyDTO.getType(),
+                policyDTO.getSurname(),
+                policyDTO.getSum(),
+                policyDTO.getObject()
+        );
+    }
+
+    public PolicyDTO toDTO(Policy policy) {
+        if (Objects.isNull(policy)) {
+            return new PolicyDTO();
+        }
+        return new PolicyDTO (
+                policy.getNumber(),
+                policy.getName(),
+                policy.getType(),
+                policy.getSurname(),
+                policy.getSum(),
+                policy.getObject()
+        );
     }
 }

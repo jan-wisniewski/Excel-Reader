@@ -7,7 +7,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
 @Table(name = "policies")
 @Entity
 public class Policy {
@@ -33,4 +32,13 @@ public class Policy {
 
     @Column
     private String object;
+
+    public Policy(Long number, String type, String sum, String name, String surname, String object) {
+        this.number = number;
+        this.type = type;
+        this.sum = sum;
+        this.name = name;
+        this.surname = surname;
+        this.object = object;
+    }
 }

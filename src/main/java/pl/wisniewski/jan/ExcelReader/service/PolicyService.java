@@ -30,7 +30,7 @@ public class PolicyService {
     }
 
     public List<PolicyDTO> findAll() {
-        return List.of(new PolicyDTO());
+        return policyRepository.findAll().stream().map(policyMapper::toDTO).collect(Collectors.toList());
     }
 
     public List<PolicyDTO> readXlsxFile(MultipartFile file) {
@@ -41,15 +41,14 @@ public class PolicyService {
         excelService.getAllRowsFromFile(file).stream().forEach(cell -> {
             if (cell.getRowNum() > 0) {
                 policiesDTO.add(
-                        PolicyDTO
-                                .builder()
-                                .number((Long) excelService.getProperValueFromCell(cell.getCell(0)))
-                                .type((String) excelService.getProperValueFromCell(cell.getCell(1)))
-                                .sum(String.valueOf(excelService.getProperValueFromCell(cell.getCell(2))))
-                                .name((String) excelService.getProperValueFromCell(cell.getCell(3)))
-                                .surname((String) excelService.getProperValueFromCell(cell.getCell(4)))
-                                .object((String) excelService.getProperValueFromCell(cell.getCell(5)))
-                                .build()
+                        new PolicyDTO (
+                                (Long) excelService.getProperValueFromCell(cell.getCell(0)),
+                                (String) excelService.getProperValueFromCell(cell.getCell(1)),
+                                String.valueOf(excelService.getProperValueFromCell(cell.getCell(2))),
+                                (String) excelService.getProperValueFromCell(cell.getCell(3)),
+                                (String) excelService.getProperValueFromCell(cell.getCell(4)),
+                                (String) excelService.getProperValueFromCell(cell.getCell(5))
+                        )
                 );
             }
         });
