@@ -12,8 +12,8 @@ export class FileService {
 
   HTTP_URL = 'http://localhost:8081/api/';
 
-  findAll(): Observable<HttpResponse<Policy>> {
-    return this.httpClient.get<Policy>(`${this.HTTP_URL}policy/upload`, { observe: 'response' });
+  findAll(): Observable<HttpResponse<Policy[]>> {
+    return this.httpClient.get<Policy[]>(`${this.HTTP_URL}policy/all`, { observe: 'response' });
   }
 
   upload(file: File): Observable<HttpEvent<any>> {
