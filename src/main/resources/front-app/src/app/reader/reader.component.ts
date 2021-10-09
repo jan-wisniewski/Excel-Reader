@@ -1,3 +1,6 @@
+import { SnackbarComponent } from './../snackbar/snackbar.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { Policy } from '../shared/models/policy/policy.model';
 import { FileService } from './../services/file.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
@@ -12,14 +15,21 @@ export class ReaderComponent implements OnInit {
 
   uploadedFile: any;
   pencil = faPencilAlt;
+  policies: Policy[] = []
 
   fileForm = this.fb.group({
     file: ['', Validators.required]
   })
 
-  constructor(private fb: FormBuilder, private fileService: FileService) {}
+  constructor(private fb: FormBuilder, private fileService: FileService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
+  }
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      duration: 5 * 1000,
+    });
   }
 
   onFileSelected(event: any) {
@@ -29,7 +39,19 @@ export class ReaderComponent implements OnInit {
   onFileSend() {
     this.fileService.upload(this.uploadedFile)
     .subscribe(resp => {
-      console.log(resp);
+      this.getAllPolicies();
+      this.openSnackBar();
+    });
+  }
+
+  getAllPolicies() {
+    this.fileService.findAll()
+    .subscribe(resp => {
+      if (resp.body) {
+        console.log(resp);
+        this.policies = resp?.body;
+        console.log(this.policies);
+      }
     });
   }
 
