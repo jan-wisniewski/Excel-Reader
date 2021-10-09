@@ -25,6 +25,7 @@ export class TableComponent implements OnInit {
     this.fileService.findAll().subscribe(res => {
       if (res.body) {
         this.dataSource = res?.body;
+        console.log(this.dataSource);
       }
     });
   }

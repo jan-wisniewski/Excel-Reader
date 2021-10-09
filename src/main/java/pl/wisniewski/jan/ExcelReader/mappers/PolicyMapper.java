@@ -15,10 +15,10 @@ public class PolicyMapper {
         }
         return new Policy (
                 policyDTO.getNumber(),
-                policyDTO.getName(),
                 policyDTO.getType(),
-                policyDTO.getSurname(),
                 policyDTO.getSum(),
+                policyDTO.getName(),
+                policyDTO.getSurname(),
                 policyDTO.getObject()
         );
     }
@@ -29,10 +29,10 @@ public class PolicyMapper {
         }
         return new PolicyDTO (
                 policy.getNumber(),
-                policy.getName(),
                 policy.getType(),
-                policy.getSurname(),
                 policy.getSum(),
+                policy.getName(),
+                policy.getSurname(),
                 policy.getObject()
         );
     }
