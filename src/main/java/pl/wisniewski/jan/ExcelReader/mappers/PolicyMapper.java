@@ -19,7 +19,8 @@ public class PolicyMapper {
                 policyDTO.getSum(),
                 policyDTO.getName(),
                 policyDTO.getSurname(),
-                policyDTO.getObject()
+                policyDTO.getObject(),
+                policyDTO.getValid()
         );
     }
 
@@ -33,7 +34,8 @@ public class PolicyMapper {
                 policy.getSum(),
                 policy.getName(),
                 policy.getSurname(),
-                policy.getObject()
+                policy.getObject(),
+                policy.getValid()
         );
     }
 }

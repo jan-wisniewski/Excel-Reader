@@ -9,41 +9,41 @@
 
   <!-- Position Column -->
   <ng-container matColumnDef="number">
-    <th class="w-85" mat-header-cell *matHeaderCellDef> Numer </th>
+    <th class="w-85" mat-header-cell *matHeaderCellDef> Numer polisy </th>
     <td mat-cell *matCellDef="let element"> {{element.number}} </td>
   </ng-container>
 
   <!-- Name Column -->
   <ng-container matColumnDef="type">
-    <th class="w-85" mat-header-cell *matHeaderCellDef> Nazwa </th>
+    <th class="w-85" mat-header-cell *matHeaderCellDef> Typ polisy </th>
     <td mat-cell *matCellDef="let element"> {{element.type}} </td>
   </ng-container>
 
   <!-- Weight Column -->
   <ng-container matColumnDef="sum">
-    <th class="w-85" mat-header-cell *matHeaderCellDef> Suma </th>
+    <th class="w-85" mat-header-cell *matHeaderCellDef> Suma ubezpieczenia</th>
     <td mat-cell *matCellDef="let element"> {{element.sum}} </td>
   </ng-container>
 
   <!-- Symbol Column -->
   <ng-container matColumnDef="name">
-    <th class="w-85" mat-header-cell *matHeaderCellDef> Name </th>
+    <th class="w-85" mat-header-cell *matHeaderCellDef> Imię ubiezpieczonego </th>
     <td mat-cell *matCellDef="let element"> {{element.name}} </td>
   </ng-container>
 
     <!-- Symbol Column -->
     <ng-container matColumnDef="surname">
-      <th class="w-85" mat-header-cell *matHeaderCellDef> Surname </th>
+      <th class="w-85" mat-header-cell *matHeaderCellDef> Nazwisko ubezpieczonego </th>
       <td mat-cell *matCellDef="let element"> {{element.surname}} </td>
     </ng-container>
 
       <!-- Symbol Column -->
   <ng-container matColumnDef="object">
-    <th mat-header-cell class="w-85" mat-header-cell *matHeaderCellDef> Object </th>
+    <th mat-header-cell class="w-85" mat-header-cell *matHeaderCellDef> Przedmiot ubezpieczonego </th>
     <td mat-cell *matCellDef="let element"> {{element.object}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;" [ngClass]="{ 'bg-not-valid': !row?.valid }"></tr>
 </table>
 

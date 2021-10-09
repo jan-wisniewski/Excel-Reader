@@ -1,12 +1,8 @@
 package pl.wisniewski.jan.ExcelReader.model;
 
-import lombok.*;
-
 import javax.persistence.*;
+import java.util.Objects;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Data
 @Table(name = "policies")
 @Entity
 public class Policy {
@@ -33,12 +29,107 @@ public class Policy {
     @Column
     private String object;
 
-    public Policy(Long number, String type, String sum, String name, String surname, String object) {
+    @Column
+    private Boolean valid;
+
+    public Policy(Long id, Long number, String type, String sum, String name, String surname, String object, Boolean valid) {
+        this.id = id;
         this.number = number;
         this.type = type;
         this.sum = sum;
         this.name = name;
         this.surname = surname;
         this.object = object;
+        this.valid = valid;
+    }
+
+    public Policy() {
+    }
+
+    public Policy(Long number, String type, String sum, String name, String surname, String object, Boolean valid) {
+        this.number = number;
+        this.type = type;
+        this.sum = sum;
+        this.name = name;
+        this.surname = surname;
+        this.object = object;
+        this.valid = valid;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
+    public void setNumber(Long number) {
+        this.number = number;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getSum() {
+        return sum;
+    }
+
+    public void setSum(String sum) {
+        this.sum = sum;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public String getObject() {
+        return object;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    public Boolean getValid() {
+        return valid;
+    }
+
+    public void setValid(Boolean valid) {
+        this.valid = valid;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Policy policy = (Policy) o;
+        return Objects.equals(id, policy.id) && Objects.equals(number, policy.number) && Objects.equals(type, policy.type) && Objects.equals(sum, policy.sum) && Objects.equals(name, policy.name) && Objects.equals(surname, policy.surname) && Objects.equals(object, policy.object) && Objects.equals(valid, policy.valid);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, number, type, sum, name, surname, object, valid);
     }
 }

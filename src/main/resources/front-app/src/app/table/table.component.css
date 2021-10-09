@@ -5,3 +5,7 @@
 .w-100{
   width: 100px;
 }
+
+.bg-not-valid {
+  background: rgb(228, 88, 88);
+}

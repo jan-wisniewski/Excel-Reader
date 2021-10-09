@@ -1,6 +1,5 @@
 package pl.wisniewski.jan.ExcelReader.service;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -8,6 +7,7 @@ import pl.wisniewski.jan.ExcelReader.mappers.PolicyMapper;
 import pl.wisniewski.jan.ExcelReader.model.Policy;
 import pl.wisniewski.jan.ExcelReader.model.PolicyDTO;
 import pl.wisniewski.jan.ExcelReader.repositories.PolicyRepository;
+import pl.wisniewski.jan.ExcelReader.validators.PolicyValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,18 +15,19 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
-@Slf4j
 public class PolicyService {
 
     private final ExcelService excelService;
     private final PolicyMapper policyMapper;
+    private final PolicyValidator policyValidator;
 
     @Autowired
     private PolicyRepository policyRepository;
 
-    public PolicyService(ExcelService excelService, PolicyMapper policyMapper) {
+    public PolicyService(ExcelService excelService, PolicyMapper policyMapper, PolicyValidator policyValidator) {
         this.excelService = excelService;
         this.policyMapper = policyMapper;
+        this.policyValidator = policyValidator;
     }
 
     public List<PolicyDTO> findAll() {
@@ -47,15 +48,24 @@ public class PolicyService {
                                 String.valueOf(excelService.getProperValueFromCell(cell.getCell(2))),
                                 (String) excelService.getProperValueFromCell(cell.getCell(3)),
                                 (String) excelService.getProperValueFromCell(cell.getCell(4)),
-                                (String) excelService.getProperValueFromCell(cell.getCell(5))
+                                (String) excelService.getProperValueFromCell(cell.getCell(5)),
+                                false
                         )
                 );
             }
         });
 
-        List<Policy> collect = policiesDTO.stream().map(policyMapper::toEntity).collect(Collectors.toList());
+        List<PolicyDTO> validatedPolicies = validatePolicies(policiesDTO);
+        List<Policy> collect = validatedPolicies.stream().map(policyMapper::toEntity).collect(Collectors.toList());
         policyRepository.saveAll(collect);
         return policiesDTO;
+    }
+
+    private List<PolicyDTO> validatePolicies (List<PolicyDTO> policyDTOS) {
+        return policyDTOS.stream().map(policyDTO -> {
+            policyDTO.setValid(policyValidator.isValid(policyDTO));
+            return policyDTO;
+        }).collect(Collectors.toList());
     }
 
 }
