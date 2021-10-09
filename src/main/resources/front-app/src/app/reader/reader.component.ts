@@ -44,20 +44,7 @@ export class ReaderComponent implements OnInit {
   onFileSend() {
     this.fileService.upload(this.uploadedFile)
     .subscribe(resp => {
-      this.getAllPolicies();
       this.openSnackBar();
     });
   }
-
-  getAllPolicies() {
-    this.fileService.findAll()
-    .subscribe(resp => {
-      if (resp.body) {
-        console.log(resp);
-        this.policies = resp?.body;
-        console.log(this.policies);
-      }
-    });
-  }
-
 }
