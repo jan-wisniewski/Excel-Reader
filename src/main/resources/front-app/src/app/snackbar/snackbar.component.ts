@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { interval } from 'rxjs';
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-snackbar',
   template: `
-  <span class="example-pizza-party">ssss
+    <div><fa-icon [icon]="successIcon"></fa-icon> {{ text }}</div>
 <mat-progress-bar mode="determinate" value="{{value}}"></mat-progress-bar>
-</span>
 `
 })
 export class SnackbarComponent implements OnInit {
 
+  successIcon = faCheckCircle;
   text: string = 'Dane zostały przesłane poprawnie';
   value: number = 100;
 

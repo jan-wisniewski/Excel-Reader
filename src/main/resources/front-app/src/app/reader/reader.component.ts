@@ -5,6 +5,7 @@ import { FileService } from './../services/file.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-reader',
@@ -14,7 +15,8 @@ import { faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 export class ReaderComponent implements OnInit {
 
   uploadedFile: any;
-  pencil = faPencilAlt;
+  pencilIcon = faPencilAlt;
+  infoIcon = faInfoCircle;
   policies: Policy[] = []
 
   fileForm = this.fb.group({
@@ -28,7 +30,10 @@ export class ReaderComponent implements OnInit {
 
   openSnackBar() {
     this.snackBar.openFromComponent(SnackbarComponent, {
-      duration: 5 * 1000,
+      duration: 3 * 1000,
+      horizontalPosition: 'end',
+      verticalPosition: 'top',
+      panelClass: ['green-snackbar'],
     });
   }
 

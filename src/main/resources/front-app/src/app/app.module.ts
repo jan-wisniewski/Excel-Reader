@@ -10,12 +10,17 @@ import { TableComponent } from './table/table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
+import { SnackbarComponent } from './snackbar/snackbar.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 @NgModule({
   declarations: [
     AppComponent,
     ReaderComponent,
-    TableComponent
+    TableComponent,
+    SnackbarComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +30,10 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatTableModule
+    MatTableModule,
+    MatSnackBarModule,
+    MatProgressBarModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

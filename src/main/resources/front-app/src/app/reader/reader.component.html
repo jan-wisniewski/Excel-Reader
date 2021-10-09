@@ -1,11 +1,11 @@
 <div class="container" style="text-align: center;">
       <form [formGroup]="fileForm" (ngSubmit)="onFileSend()">
-        <label for="formFile" class="form-label"> Please Select File:</label>
+        <label for="formFile" class="form-label"> Wprowadź plik w formacie .xlsx lub .xls</label>
         <input class="form-control" type="file" id="upload-file" accept=".xlsx, xls" (change)="onFileSelected($event)" formControlName="file">
         <ng-container *ngIf="uploadedFile">
           <div>{{ uploadedFile?.target?.files[0]?.name}}</div>
         </ng-container>
-        <button class="btn btn-success btn-sm" style="text-align: center;" [disabled]="!fileForm.valid"><fa-icon [icon]="pencil"></fa-icon> Dodaj dane</button>
+        <button class="btn btn-success btn-sm" style="text-align: center;" [disabled]="!fileForm.valid"><fa-icon [icon]="pencilIcon"></fa-icon> Dodaj dane</button>
       </form>
       <app-table></app-table>
 </div>
