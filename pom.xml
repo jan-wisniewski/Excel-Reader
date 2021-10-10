@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -58,48 +58,52 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
 		<plugins>
-		<plugin>
-           <artifactId>maven-resources-plugin</artifactId>
-            <executions>
-               <execution>
-                   <id>copy-resources</id>
-                   <phase>validate</phase>
-                   <goals><goal>copy-resources</goal></goals>
-                   <configuration>
-                       <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>
-                       <resources>
-                           <resource>
-                               <directory>${project.parent.basedir}/front-app/dist/front-app</directory>
-                           </resource>
-                       </resources>
-                   </configuration>
-               </execution>
-           </executions>
-       </plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>exec-maven-plugin</artifactId>
-				<version>1.6.0</version>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>exec</goal>
-						</goals>
-					</execution>
-				</executions>
-				<configuration>
-					<executable>ng</executable>
-					<workingDirectory>src/main/resources/front-app</workingDirectory>
-					<arguments>
-						<argument>build</argument>
-					</arguments>
-				</configuration>
-			</plugin>
+			<!--		<plugin>-->
+			<!--           <artifactId>maven-resources-plugin</artifactId>-->
+			<!--            <executions>-->
+			<!--               <execution>-->
+			<!--                   <id>copy-resources</id>-->
+			<!--                   <phase>validate</phase>-->
+			<!--                   <goals><goal>copy-resources</goal></goals>-->
+			<!--                   <configuration>-->
+			<!--                       <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>-->
+			<!--                       <resources>-->
+			<!--                           <resource>-->
+			<!--                               <directory>${project.parent.basedir}/front-app/dist/front-app</directory>-->
+			<!--                           </resource>-->
+			<!--                       </resources>-->
+			<!--                   </configuration>-->
+			<!--               </execution>-->
+			<!--           </executions>-->
+			<!--       </plugin>-->
+			<!--			<plugin>-->
+			<!--				<groupId>org.codehaus.mojo</groupId>-->
+			<!--				<artifactId>exec-maven-plugin</artifactId>-->
+			<!--				<version>1.6.0</version>-->
+			<!--				<executions>-->
+			<!--					<execution>-->
+			<!--						<phase>validate</phase>-->
+			<!--						<goals>-->
+			<!--							<goal>exec</goal>-->
+			<!--						</goals>-->
+			<!--					</execution>-->
+			<!--				</executions>-->
+			<!--				<configuration>-->
+			<!--					<executable>ng</executable>-->
+			<!--					<workingDirectory>src/main/resources/front-app</workingDirectory>-->
+			<!--					<arguments>-->
+			<!--						<argument>build</argument>-->
+			<!--					</arguments>-->
+			<!--				</configuration>-->
+			<!--			</plugin>-->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>

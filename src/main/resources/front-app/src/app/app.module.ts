@@ -10,7 +10,7 @@ import { TableComponent } from './table/table.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { MatTableModule } from '@angular/material/table';
 import { HttpClientModule } from '@angular/common/http';
-import { SnackbarComponent } from './snackbar/snackbar.component';
+import { SnackBar } from './snackbar/snackbar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -20,7 +20,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     AppComponent,
     ReaderComponent,
     TableComponent,
-    SnackbarComponent
+    SnackBar
   ],
   imports: [
     BrowserModule,
