@@ -41,15 +41,21 @@ public class PolicyService {
         List<PolicyDTO> policiesDTO = new ArrayList<>();
         excelService.getAllRowsFromFile(file).stream().forEach(cell -> {
             if (cell.getRowNum() > 0) {
+                Object policyNumber = excelService.getProperValueFromCell(cell.getCell(0));
+                Long parsedNumber = null;
+                if (policyNumber.getClass().equals(Long.class)) {
+                    parsedNumber = (Long) policyNumber;
+                }
                 policiesDTO.add(
                         new PolicyDTO (
-                                (Long) excelService.getProperValueFromCell(cell.getCell(0)),
+                                parsedNumber,
                                 (String) excelService.getProperValueFromCell(cell.getCell(1)),
                                 String.valueOf(excelService.getProperValueFromCell(cell.getCell(2))),
                                 (String) excelService.getProperValueFromCell(cell.getCell(3)),
                                 (String) excelService.getProperValueFromCell(cell.getCell(4)),
                                 (String) excelService.getProperValueFromCell(cell.getCell(5)),
-                                false
+                                false,
+                                ""
                         )
                 );
             }
@@ -63,7 +69,12 @@ public class PolicyService {
 
     private List<PolicyDTO> validatePolicies (List<PolicyDTO> policyDTOS) {
         return policyDTOS.stream().map(policyDTO -> {
-            policyDTO.setValid(policyValidator.isValid(policyDTO));
+            List<String> validationErrors = policyValidator.getValidationErrors(policyDTO);
+            boolean valid = validationErrors.isEmpty();
+            if (!valid) {
+                policyDTO.setDescription(String.join(", ", validationErrors));
+            }
+            policyDTO.setValid(valid);
             return policyDTO;
         }).collect(Collectors.toList());
     }

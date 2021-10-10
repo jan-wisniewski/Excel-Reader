@@ -1,6 +1,7 @@
 import { Policy } from './../shared/models/policy/policy.model';
 import { FileService } from './../services/file.service';
 import { Component, OnInit } from '@angular/core';
+import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-table',
@@ -9,8 +10,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableComponent implements OnInit {
 
-  displayedColumns: string[] = ['number', 'type', 'sum', 'name', 'surname', 'object'];
+  displayedColumns: string[] = ['number', 'type', 'sum', 'name', 'surname', 'object', 'description'];
   dataSource: Policy[] = [];
+  invalidPolicies: number = 0;
+  exclamationIcon = faExclamationCircle;
 
   constructor(private fileService: FileService) { }
 
@@ -25,7 +28,7 @@ export class TableComponent implements OnInit {
     this.fileService.findAll().subscribe(res => {
       if (res.body) {
         this.dataSource = res?.body;
-        console.log(this.dataSource);
+        this.invalidPolicies = this.dataSource.filter(policy => policy?.valid).length;
       }
     });
   }

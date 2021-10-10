@@ -5,4 +5,6 @@ export class Policy {
   name!: string;
   surname!: string;
   object!: string;
+  valid!: boolean;
+  description!: string;
 }

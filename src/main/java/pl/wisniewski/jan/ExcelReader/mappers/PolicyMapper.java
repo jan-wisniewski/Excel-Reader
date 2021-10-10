@@ -20,7 +20,8 @@ public class PolicyMapper {
                 policyDTO.getName(),
                 policyDTO.getSurname(),
                 policyDTO.getObject(),
-                policyDTO.getValid()
+                policyDTO.getValid(),
+                policyDTO.getDescription()
         );
     }
 
@@ -35,7 +36,8 @@ public class PolicyMapper {
                 policy.getName(),
                 policy.getSurname(),
                 policy.getObject(),
-                policy.getValid()
+                policy.getValid(),
+                policy.getDescription()
         );
     }
 }

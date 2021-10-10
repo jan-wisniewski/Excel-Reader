@@ -32,7 +32,10 @@ public class Policy {
     @Column
     private Boolean valid;
 
-    public Policy(Long id, Long number, String type, String sum, String name, String surname, String object, Boolean valid) {
+    @Column
+    private String description;
+
+    public Policy(Long id, Long number, String type, String sum, String name, String surname, String object, Boolean valid, String description) {
         this.id = id;
         this.number = number;
         this.type = type;
@@ -41,12 +44,13 @@ public class Policy {
         this.surname = surname;
         this.object = object;
         this.valid = valid;
+        this.description = description;
     }
 
     public Policy() {
     }
 
-    public Policy(Long number, String type, String sum, String name, String surname, String object, Boolean valid) {
+    public Policy(Long number, String type, String sum, String name, String surname, String object, Boolean valid, String description) {
         this.number = number;
         this.type = type;
         this.sum = sum;
@@ -54,6 +58,7 @@ public class Policy {
         this.surname = surname;
         this.object = object;
         this.valid = valid;
+        this.description = description;
     }
 
     public Long getId() {
@@ -120,16 +125,24 @@ public class Policy {
         this.valid = valid;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Policy policy = (Policy) o;
-        return Objects.equals(id, policy.id) && Objects.equals(number, policy.number) && Objects.equals(type, policy.type) && Objects.equals(sum, policy.sum) && Objects.equals(name, policy.name) && Objects.equals(surname, policy.surname) && Objects.equals(object, policy.object) && Objects.equals(valid, policy.valid);
+        return Objects.equals(id, policy.id) && Objects.equals(number, policy.number) && Objects.equals(type, policy.type) && Objects.equals(sum, policy.sum) && Objects.equals(name, policy.name) && Objects.equals(surname, policy.surname) && Objects.equals(object, policy.object) && Objects.equals(valid, policy.valid) && Objects.equals(description, policy.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, number, type, sum, name, surname, object, valid);
+        return Objects.hash(id, number, type, sum, name, surname, object, valid, description);
     }
 }

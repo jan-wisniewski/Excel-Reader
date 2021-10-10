@@ -10,8 +10,9 @@ public class PolicyDTO {
     private String surname;
     private String object;
     private Boolean valid;
+    private String description;
 
-    public PolicyDTO(Long number, String type, String sum, String name, String surname, String object, Boolean valid) {
+    public PolicyDTO(Long number, String type, String sum, String name, String surname, String object, Boolean valid, String description) {
         this.number = number;
         this.type = type;
         this.sum = sum;
@@ -19,6 +20,7 @@ public class PolicyDTO {
         this.surname = surname;
         this.object = object;
         this.valid = valid;
+        this.description = description;
     }
 
     public PolicyDTO() {
@@ -80,16 +82,24 @@ public class PolicyDTO {
         this.valid = valid;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PolicyDTO policyDTO = (PolicyDTO) o;
-        return Objects.equals(number, policyDTO.number) && Objects.equals(type, policyDTO.type) && Objects.equals(sum, policyDTO.sum) && Objects.equals(name, policyDTO.name) && Objects.equals(surname, policyDTO.surname) && Objects.equals(object, policyDTO.object) && Objects.equals(valid, policyDTO.valid);
+        return Objects.equals(number, policyDTO.number) && Objects.equals(type, policyDTO.type) && Objects.equals(sum, policyDTO.sum) && Objects.equals(name, policyDTO.name) && Objects.equals(surname, policyDTO.surname) && Objects.equals(object, policyDTO.object) && Objects.equals(valid, policyDTO.valid) && Objects.equals(description, policyDTO.description);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(number, type, sum, name, surname, object, valid);
+        return Objects.hash(number, type, sum, name, surname, object, valid, description);
     }
 }
