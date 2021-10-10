@@ -34,6 +34,11 @@ public class PolicyService {
         return policyRepository.findAll().stream().map(policyMapper::toDTO).collect(Collectors.toList());
     }
 
+    public List<PolicyDTO> deleteAll() {
+        policyRepository.deleteAll();
+        return new ArrayList<>();
+    }
+
     public List<PolicyDTO> readXlsxFile(MultipartFile file) {
         if (Objects.isNull(file)) {
             throw new IllegalArgumentException("File object is null");

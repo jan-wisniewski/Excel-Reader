@@ -2,6 +2,8 @@ import { Policy } from './../shared/models/policy/policy.model';
 import { FileService } from './../services/file.service';
 import { Component, OnInit } from '@angular/core';
 import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { SnackBarService } from './../services/snackbar.service';
 
 @Component({
   selector: 'app-table',
@@ -14,17 +16,29 @@ export class TableComponent implements OnInit {
   dataSource: Policy[] = [];
   invalidPolicies: number = 0;
   exclamationIcon = faExclamationCircle;
+  trashIcon = faTrash;
 
-  constructor(private fileService: FileService) { }
+  constructor(private fileService: FileService, private snackBarService: SnackBarService) { }
 
   ngOnInit(): void {
     this.findAllPolicies();
-    this.fileService.refresh$.subscribe( () => {
-      this.findAllPolicies();
+    this.updateTable();
+  }
+
+  updateTable(): void {
+  this.fileService.refresh$.subscribe( () => {
+        this.findAllPolicies();
+      });
+  }
+
+  deleteAll(): void {
+    this.fileService.deleteAll().subscribe( res => {
+    this.updateTable();
+    this.snackBarService.openSnackBar('success', 'green-snackbar', 'Dane zostały usunięte poprawnie');
     });
   }
 
-  private findAllPolicies() {
+  findAllPolicies() {
     this.fileService.findAll().subscribe(res => {
       if (res.body) {
         this.dataSource = res?.body;

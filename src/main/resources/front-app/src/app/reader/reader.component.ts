@@ -1,6 +1,4 @@
 import { SnackBarService } from './../services/snackbar.service';
-import { SnackBar } from '../snackbar/snackbar.component';
-import { MatSnackBar } from '@angular/material/snack-bar';
 import { Policy } from '../shared/models/policy/policy.model';
 import { FileService } from './../services/file.service';
 import { Component, OnInit } from '@angular/core';
@@ -24,25 +22,12 @@ export class ReaderComponent implements OnInit {
     file: ['', Validators.required]
   })
 
-  constructor(private fb: FormBuilder, private fileService: FileService, private snackBar: MatSnackBar, private snackBarService: SnackBarService) {}
+  constructor(private fb: FormBuilder, private fileService: FileService, private snackBarService: SnackBarService) {}
 
   errorsMessage = '';
   invalidFile = false;
 
   ngOnInit(): void {
-  }
-
-  openSnackBar(type: string, style: string, message?: string) {
-    if (!message) {
-      message = '';
-    }
-   this.snackBarService.nextType(type, message);
-    this.snackBar.openFromComponent(SnackBar, {
-      duration: 3 * 1000,
-      horizontalPosition: 'end',
-      verticalPosition: 'top',
-      panelClass: [style],
-    });
   }
 
   onFileSelected(event: any) {
@@ -52,12 +37,12 @@ export class ReaderComponent implements OnInit {
   onFileSend() {
     this.fileService.upload(this.uploadedFile)
     .subscribe(resp => {
-      this.openSnackBar('success', 'green-snackbar', 'Dane zostały zapisane poprawnie');
+      this.snackBarService.openSnackBar('success', 'green-snackbar', 'Dane zostały zapisane poprawnie');
     },
     (exception) => {
       this.invalidFile = true;
       this.errorsMessage = exception?.error?.message;
-      this.openSnackBar('warning', 'red-snackbar', this.errorsMessage);
+      this.snackBarService.openSnackBar('warning', 'red-snackbar', this.errorsMessage);
   });
   }
 }

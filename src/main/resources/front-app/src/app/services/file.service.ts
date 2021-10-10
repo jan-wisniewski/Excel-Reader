@@ -1,5 +1,5 @@
 import { Policy } from '../shared/models/policy/policy.model';
-import { HttpClient, HttpEvent, HttpRequest, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpEvent, HttpParams, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -19,8 +19,21 @@ export class FileService {
     return this._refresh$;
   }
 
-  findAll(): Observable<HttpResponse<Policy[]>> {
-    return this.httpClient.get<Policy[]>(`${this.HTTP_URL}policy/all`, { observe: 'response' });
+  findAll(filter?: string): Observable<HttpResponse<Policy[]>> {
+    let params = new HttpParams();
+    if (filter) {
+      params.set('filter', filter);
+    }
+    return this.httpClient.get<Policy[]>(`${this.HTTP_URL}policy/all`, { observe: 'response', params: params });
+  }
+
+  deleteAll(): Observable<HttpResponse<Policy[]>> {
+    return this.httpClient.delete<Policy[]>(`${this.HTTP_URL}policy/delete`, { observe: 'response' })
+    .pipe(
+          tap( () => {
+            this._refresh$.next();
+          })
+        );
   }
 
   upload(file: File): Observable<HttpEvent<any>> {

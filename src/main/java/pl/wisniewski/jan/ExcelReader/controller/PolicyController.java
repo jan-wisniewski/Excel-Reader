@@ -1,9 +1,7 @@
 package pl.wisniewski.jan.ExcelReader.controller;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.wisniewski.jan.ExcelReader.model.PolicyDTO;
 import pl.wisniewski.jan.ExcelReader.service.PolicyService;
@@ -21,7 +19,7 @@ public class PolicyController {
         this.policyService = policyService;
     }
 
-    @RequestMapping("/upload")
+    @PostMapping("/upload")
     public ResponseEntity<List<PolicyDTO>> upload(MultipartFile file) {
         List<PolicyDTO> policyDTOS = policyService.readXlsxFile(file);
         return ResponseEntity.ok(policyDTOS);
@@ -30,6 +28,12 @@ public class PolicyController {
     @RequestMapping("/all")
     public ResponseEntity<List<PolicyDTO>> all() {
         return ResponseEntity.ok(policyService.findAll());
+    }
+
+    @DeleteMapping("/delete")
+    @CrossOrigin(origins = "http://localhost:4200")
+    public ResponseEntity<List<PolicyDTO>> deleteAll() {
+        return ResponseEntity.ok(policyService.deleteAll());
     }
 
 }

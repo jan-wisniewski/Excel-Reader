@@ -2,9 +2,13 @@
   <div class="alert alert-warning">Brak danych. Wprowadź plik</div>
 </ng-container>
 
+
 <ng-container *ngIf="invalidPolicies > 0">
   <div class="alert alert-danger"><fa-icon [icon]="exclamationIcon"></fa-icon> Liczba niepoprawnie uzupełnionych polis: <B>{{invalidPolicies}}</B></div>
 </ng-container>
+
+
+<button class="btn btn-danger btn-sm" style="text-align: center;" (click)="deleteAll()" *ngIf="dataSource.length !== 0"><fa-icon [icon]="trashIcon"></fa-icon> Usuń wszystkie polisy</button>
 
 <table *ngIf="dataSource.length !== 0" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
