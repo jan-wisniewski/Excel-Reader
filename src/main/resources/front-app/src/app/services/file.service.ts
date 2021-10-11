@@ -19,12 +19,8 @@ export class FileService {
     return this._refresh$;
   }
 
-  findAll(filter?: string): Observable<HttpResponse<Policy[]>> {
-    let params = new HttpParams();
-    if (filter) {
-      params.set('filter', filter);
-    }
-    return this.httpClient.get<Policy[]>(`${this.HTTP_URL}policy/all`, { observe: 'response', params: params });
+  public findAll(): Observable<HttpResponse<Policy[]>> {
+    return this.httpClient.get<Policy[]>(`${this.HTTP_URL}policy/all`, { observe: 'response' })
   }
 
   deleteAll(): Observable<HttpResponse<Policy[]>> {

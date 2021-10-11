@@ -7,10 +7,22 @@
   <div class="alert alert-danger"><fa-icon [icon]="exclamationIcon"></fa-icon> Liczba niepoprawnie uzupełnionych polis: <B>{{invalidPolicies}}</B></div>
 </ng-container>
 
+<ng-container  *ngIf="dataSource.length !== 0">
+  <div class="row">
+    <div class="col-6">
+      <mat-form-field appearance="standard">
+        <mat-label>Filtr</mat-label>
+        <input matInput placeholder="Wpisz wartość" (keyup)="applyFilter($event)" #input>
+      </mat-form-field>
+    </div>
+    <div class="col-6">
+      <button class="btn btn-danger btn-sm" style="text-align: center;" (click)="deleteAll()"><fa-icon [icon]="trashIcon"></fa-icon> Usuń wszystkie polisy</button>
+    </div>
+  </div>
 
-<button class="btn btn-danger btn-sm" style="text-align: center;" (click)="deleteAll()" *ngIf="dataSource.length !== 0"><fa-icon [icon]="trashIcon"></fa-icon> Usuń wszystkie polisy</button>
+</ng-container>
 
-<table *ngIf="dataSource.length !== 0" mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+<table *ngIf="dataSource.length !== 0" mat-table [dataSource]="tableDataSource" class="mat-elevation-z8">
 
   <ng-container matColumnDef="number">
     <th class="w-85" mat-header-cell *matHeaderCellDef> Numer polisy </th>
