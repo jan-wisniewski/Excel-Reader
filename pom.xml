@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>pl.wisniewski.jan</groupId>
 	<artifactId>Excel-Reader</artifactId>
-	<version>0.0.1</version>
+	<version>1.0</version>
 	<name>Excel-Reader</name>
 	<description>App to reading excel files</description>
 	<properties>
@@ -65,45 +65,8 @@
 	</dependencies>
 
 	<build>
+		<finalName>excel</finalName>
 		<plugins>
-			<!--		<plugin>-->
-			<!--           <artifactId>maven-resources-plugin</artifactId>-->
-			<!--            <executions>-->
-			<!--               <execution>-->
-			<!--                   <id>copy-resources</id>-->
-			<!--                   <phase>validate</phase>-->
-			<!--                   <goals><goal>copy-resources</goal></goals>-->
-			<!--                   <configuration>-->
-			<!--                       <outputDirectory>${project.build.directory}/classes/resources/</outputDirectory>-->
-			<!--                       <resources>-->
-			<!--                           <resource>-->
-			<!--                               <directory>${project.parent.basedir}/front-app/dist/front-app</directory>-->
-			<!--                           </resource>-->
-			<!--                       </resources>-->
-			<!--                   </configuration>-->
-			<!--               </execution>-->
-			<!--           </executions>-->
-			<!--       </plugin>-->
-			<!--			<plugin>-->
-			<!--				<groupId>org.codehaus.mojo</groupId>-->
-			<!--				<artifactId>exec-maven-plugin</artifactId>-->
-			<!--				<version>1.6.0</version>-->
-			<!--				<executions>-->
-			<!--					<execution>-->
-			<!--						<phase>validate</phase>-->
-			<!--						<goals>-->
-			<!--							<goal>exec</goal>-->
-			<!--						</goals>-->
-			<!--					</execution>-->
-			<!--				</executions>-->
-			<!--				<configuration>-->
-			<!--					<executable>ng</executable>-->
-			<!--					<workingDirectory>src/main/resources/front-app</workingDirectory>-->
-			<!--					<arguments>-->
-			<!--						<argument>build</argument>-->
-			<!--					</arguments>-->
-			<!--				</configuration>-->
-			<!--			</plugin>-->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
