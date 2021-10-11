@@ -49,7 +49,7 @@ public class ExcelService {
         List<XSSFSheet> allSheets = getAllSheets(readXlSXFile(file));
         if (allSheets.size() > 0) {
            if (!verifyExcelStructure(allSheets.get(0))) {
-               throw new IllegalArgumentException("Incorrect excel structure!");
+               throw new IllegalArgumentException("Incorrect excel structure! Required columns: "+ String.join(", ", SystemConfig.getExcelColumnsStructure()));
            }
         }
         return getTotalRowsFromSheetsList(allSheets);
@@ -74,7 +74,6 @@ public class ExcelService {
         for (int i = 0; i < numberOfCells; i++) {
             cellsInFirstRow.add(firstRow.getCell(i));
         }
-        List<String> namesOfColumns = getNamesOfColumns(cellsInFirstRow);
         return SystemConfig.getExcelColumnsStructure().containsAll(getNamesOfColumns(cellsInFirstRow));
     }
 
