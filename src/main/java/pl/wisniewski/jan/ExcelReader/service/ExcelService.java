@@ -21,6 +21,12 @@ public class ExcelService {
 
     private final Gson gson = new Gson();
 
+    public ExcelService(SystemConfig systemConfig) {
+        this.systemConfig = systemConfig;
+    }
+
+    private final SystemConfig systemConfig;
+
     public Object getProperValueFromCell(XSSFCell xssfCell) {
         if (Objects.isNull(xssfCell)) {
             return "";
@@ -49,7 +55,7 @@ public class ExcelService {
         List<XSSFSheet> allSheets = getAllSheets(readXlSXFile(file));
         if (allSheets.size() > 0) {
            if (!verifyExcelStructure(allSheets.get(0))) {
-               throw new IllegalArgumentException("Incorrect excel structure! Required columns: "+ String.join(", ", SystemConfig.getExcelColumnsStructure()));
+               throw new IllegalArgumentException("Incorrect excel structure");
            }
         }
         return getTotalRowsFromSheetsList(allSheets);
@@ -74,7 +80,7 @@ public class ExcelService {
         for (int i = 0; i < numberOfCells; i++) {
             cellsInFirstRow.add(firstRow.getCell(i));
         }
-        return SystemConfig.getExcelColumnsStructure().containsAll(getNamesOfColumns(cellsInFirstRow));
+        return systemConfig.getExcelColumnsStructure().containsAll(getNamesOfColumns(cellsInFirstRow));
     }
 
     public XSSFWorkbook readXlSXFile(MultipartFile file) {

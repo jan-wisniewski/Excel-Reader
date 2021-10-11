@@ -7,5 +7,7 @@
         </ng-container>
         <button class="btn btn-success btn-sm" style="text-align: center;" [disabled]="!fileForm.valid"><fa-icon [icon]="pencilIcon"></fa-icon> Dodaj dane</button>
       </form>
+      <div class="alert alert-info" *ngIf="columnNames"><fa-icon [icon]="infoIcon"></fa-icon> Kolumny: {{ columnNames }}</div>
+
       <app-table></app-table>
 </div>

@@ -5,6 +5,7 @@ import { faExclamationCircle } from '@fortawesome/free-solid-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { SnackBarService } from './../services/snackbar.service';
 import {MatTableDataSource} from '@angular/material/table';
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-table',
@@ -18,6 +19,7 @@ export class TableComponent implements OnInit {
   invalidPolicies: number = 0;
   exclamationIcon = faExclamationCircle;
   trashIcon = faTrash;
+  infoIcon = faInfoCircle;
   tableDataSource: any = '';
 
   constructor(private fileService: FileService, private snackBarService: SnackBarService) { }

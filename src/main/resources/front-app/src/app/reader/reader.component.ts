@@ -1,3 +1,4 @@
+import { ConfigService } from './../services/config.service';
 import { SnackBarService } from './../services/snackbar.service';
 import { Policy } from '../shared/models/policy/policy.model';
 import { FileService } from './../services/file.service';
@@ -22,12 +23,18 @@ export class ReaderComponent implements OnInit {
     file: ['', Validators.required]
   })
 
-  constructor(private fb: FormBuilder, private fileService: FileService, private snackBarService: SnackBarService) {}
+  constructor(private fb: FormBuilder, private fileService: FileService, private snackBarService: SnackBarService, private configService: ConfigService) {}
 
   errorsMessage = '';
   invalidFile = false;
+  columnNames: string[] = [];
 
   ngOnInit(): void {
+    this.configService.getColumnNames().subscribe(res => {
+      if (res && res?.body) {
+        this.columnNames = res.body;
+      }
+    })
   }
 
   onFileSelected(event: any) {
@@ -41,6 +48,7 @@ export class ReaderComponent implements OnInit {
     },
     (exception) => {
       this.invalidFile = true;
+      console.log(exception?.error?.message);
       this.errorsMessage = exception?.error?.message;
       this.snackBarService.openSnackBar('warning', 'red-snackbar', this.errorsMessage);
   });
