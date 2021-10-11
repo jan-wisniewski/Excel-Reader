@@ -9,3 +9,13 @@
 .bg-not-valid {
   background: rgb(255, 214, 214);
 }
+
+table {
+  width: 100%;
+}
+
+
+th.mat-header-cell {
+  text-align: center !important;
+  background: rgb(228, 227, 227);
+}
