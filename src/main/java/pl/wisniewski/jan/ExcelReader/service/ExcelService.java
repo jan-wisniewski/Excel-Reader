@@ -1,6 +1,7 @@
 package pl.wisniewski.jan.ExcelReader.service;
 
 import com.google.gson.Gson;
+import org.apache.poi.ss.usermodel.CellType;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -31,19 +32,20 @@ public class ExcelService {
         if (Objects.isNull(xssfCell)) {
             return "";
         }
-        switch (xssfCell.getCellType()) {
-            case STRING -> {
-                return xssfCell.getStringCellValue();
-            }
-            case NUMERIC -> {
-                return Double.valueOf(xssfCell.getNumericCellValue()).longValue();
-            }
-            case BOOLEAN -> {
-                return String.valueOf(xssfCell.getBooleanCellValue());
-            }
-            case BLANK -> {
-                return "";
-            }
+
+        CellType cellType = xssfCell.getCellType();
+
+        if (cellType.equals(CellType.STRING)) {
+            return xssfCell.getStringCellValue();
+        }
+        if (cellType.equals(CellType.NUMERIC)) {
+            return Double.valueOf(xssfCell.getNumericCellValue()).longValue();
+        }
+        if (cellType.equals(CellType.BOOLEAN)) {
+            return String.valueOf(xssfCell.getBooleanCellValue());
+        }
+        if (cellType.equals(CellType.BLANK)) {
+            return "";
         }
         return "";
     }
